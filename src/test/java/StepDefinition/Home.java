@@ -1,68 +1,38 @@
 package StepDefinition;
 
-import com.cts.classcode.BaseCode;
-
+import com.pageobjects.HomePageObjects;
 import cucumber.api.java.en.*;
 
-public class Home {
+public class Home{
 
-	/*@Given("^I want to write a step with precondition$")
-	public void i_want_to_write_a_step_with_precondition() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	  System.out.println("Step 1");  
-	}
-
-	@Given("^some other precondition$")
-	public void some_other_precondition() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 2");  
-	}
-
-	@When("^I complete action$")
-	public void i_complete_action() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 3");
-	}
-
-	@When("^some other action$")
-	public void some_other_action() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 4");
-	}
-
-	@When("^yet another action$")
-	public void yet_another_action() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 5");
-	}
-
-	@Then("^I validate the outcomes$")
-	public void i_validate_the_outcomes() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 6");
-	}
-
-	@Then("^check more outcomes$")
-	public void check_more_outcomes() throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-		System.out.println("Step 7");
-	}*/
-	
-		BaseCode bc = new BaseCode();
-	
 		
+		HomePageObjects bc = new HomePageObjects();
 	
-		@Given("^Launch Applicaiton$")
-		public void launch_Applicaiton() throws Throwable {
-	    bc.launchApplication("http://indiavotes.com", "Chrome");
+		@When("^User Launch Applicaiton$")
+		public void launch_Applicaiton() {
+	    bc.launchApplication("http://indiavotes.com", "ie");
 		}
 		
-		@Given("^Close Application$")
-		public void close_Application() throws Throwable {
+		@And ("^verify all tabs in home page$")
+		public void verify_all_tabs_in_home_page()  {
+		bc.verifyTabLinks();
+		}
+		
+		@Then("^Close Application$")
+		public void close_Application() {
 		bc.closeApplication("true"); 
 		}
 
-
-
-	
+				
+		@Then("^Verify the Results for selected Year \"([^\"]*)\" and state \"([^\"]*)\"$")
+		public void verify_the_Results_for_selected_Year_and_state(String arg1, String arg2) {
+		bc.selectValuesandGo(arg1, arg2);  
+		}
+		
+		
+		@Then("^Verify Values \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\" and \"([^\"]*)\"$")
+		public void verify_Values_and_and_and(String arg1, String arg2, String arg3, String arg4)  {
+		bc.verifyElectoralData(arg1, arg2, arg3, arg4);
+		}
+		
 }
